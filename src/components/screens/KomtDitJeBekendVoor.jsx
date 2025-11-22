@@ -35,9 +35,14 @@ const KomtDitJeBekendVoor = () => {
           <DrowningPerson size="medium" />
         </div>
 
-        <p className="text-base text-text text-center mb-8 leading-relaxed">
-          We hebben jouw antwoorden bekeken. Laten we zien wat eruit komt...
-        </p>
+        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-5 mb-6">
+          <p className="text-base text-text text-center mb-3 leading-relaxed font-medium">
+            We hebben jouw antwoorden bekeken en geanalyseerd.
+          </p>
+          <p className="text-sm text-text text-center leading-relaxed">
+            Druk op de knop hieronder om jouw dominante patroon te ontdekken en te zien wat dit voor jou betekent.
+          </p>
+        </div>
       </div>
 
       <button

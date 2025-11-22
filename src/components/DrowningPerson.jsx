@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const DrowningPerson = ({ size = 'medium', labelAbove = '', labelBelow = '' }) => {
+const DrowningPerson = ({ size = 'medium', labelAbove = '', labelBelow = '', animated = false }) => {
+  const [isAnimating, setIsAnimating] = useState(false);
+  
   const sizes = {
     small: { width: 120, height: 100, personSize: 40 },
     medium: { width: 200, height: 160, personSize: 60 },
@@ -8,6 +10,24 @@ const DrowningPerson = ({ size = 'medium', labelAbove = '', labelBelow = '' }) =
   };
 
   const { width, height, personSize } = sizes[size];
+
+  React.useEffect(() => {
+    if (animated) {
+      setIsAnimating(true);
+      // Animation cycles
+      const interval = setInterval(() => {
+        setIsAnimating(prev => !prev);
+      }, 300);
+      const timer = setTimeout(() => {
+        clearInterval(interval);
+        setIsAnimating(false);
+      }, 2000);
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
+    }
+  }, [animated]);
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -58,24 +78,32 @@ const DrowningPerson = ({ size = 'medium', labelAbove = '', labelBelow = '' }) =
           strokeLinecap="round"
         />
         
-        {/* Arms raised (drowning position) */}
+        {/* Arms raised (drowning position) - animated */}
         <line
           x1="100"
           y1="80"
-          x2="85"
-          y2="70"
+          x2={isAnimating ? "88" : "85"}
+          y2={isAnimating ? "63" : "70"}
           stroke="#2C3E50"
           strokeWidth="3"
           strokeLinecap="round"
+          style={{
+            transition: 'all 0.3s ease-in-out',
+            transform: isAnimating ? 'translateY(-3px)' : 'translateY(0)'
+          }}
         />
         <line
           x1="100"
           y1="80"
-          x2="115"
-          y2="70"
+          x2={isAnimating ? "112" : "115"}
+          y2={isAnimating ? "63" : "70"}
           stroke="#2C3E50"
           strokeWidth="3"
           strokeLinecap="round"
+          style={{
+            transition: 'all 0.3s ease-in-out',
+            transform: isAnimating ? 'translateY(-3px)' : 'translateY(0)'
+          }}
         />
         
         {/* Legs */}

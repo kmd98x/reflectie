@@ -14,6 +14,12 @@ body {
   background-color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
 }
 
 #root {
@@ -21,5 +27,33 @@ body {
   max-width: 480px;
   margin: 0 auto;
   background-color: #FFFFFF;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark #root {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+}
+
+/* Range Slider Styling */
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #2C3E50;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.range-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #2C3E50;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 

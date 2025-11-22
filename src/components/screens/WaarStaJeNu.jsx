@@ -33,41 +33,54 @@ const WaarStaJeNu = () => {
           Waar sta je nu?
         </h1>
 
+        <p className="text-sm text-gray-500 mb-6 text-center">
+          Geef aan hoeveel ervaring je hebt als leider, of waar je nu staat in je ontwikkeling.
+        </p>
+
         <div className="space-y-4 mb-8">
-          <label className="flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+          <label className="flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
             <input
               type="radio"
               name="situation"
               value="starting"
               checked={selected === 'starting'}
               onChange={(e) => setSelected(e.target.value)}
-              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary"
+              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary mt-0.5"
             />
-            <span className="text-base text-text">Net begonnen als leider (0-6 maanden)</span>
+            <div className="flex-1">
+              <span className="text-base text-text font-medium block mb-1">Net begonnen als leider</span>
+              <span className="text-sm text-gray-500">Ik ben 0-6 maanden bezig in een leiderschapsrol</span>
+            </div>
           </label>
 
-          <label className="flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+          <label className="flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
             <input
               type="radio"
               name="situation"
               value="ongoing"
               checked={selected === 'ongoing'}
               onChange={(e) => setSelected(e.target.value)}
-              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary"
+              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary mt-0.5"
             />
-            <span className="text-base text-text">Al enige tijd bezig (6-12 maanden)</span>
+            <div className="flex-1">
+              <span className="text-base text-text font-medium block mb-1">Al enige tijd bezig</span>
+              <span className="text-sm text-gray-500">Ik ben 6-12 maanden bezig in een leiderschapsrol</span>
+            </div>
           </label>
 
-          <label className="flex items-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+          <label className="flex items-start gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
             <input
               type="radio"
               name="situation"
               value="stuck"
               checked={selected === 'stuck'}
               onChange={(e) => setSelected(e.target.value)}
-              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary"
+              className="w-5 h-5 text-primary border-gray-300 focus:ring-primary mt-0.5"
             />
-            <span className="text-base text-text">Zit in de knoop (ongeacht tijd)</span>
+            <div className="flex-1">
+              <span className="text-base text-text font-medium block mb-1">Ik loop vast of twijfel</span>
+              <span className="text-sm text-gray-500">Ik ervaar uitdagingen of onzekerheid in mijn leiderschap, ongeacht hoe lang ik dit al doe</span>
+            </div>
           </label>
         </div>
       </div>

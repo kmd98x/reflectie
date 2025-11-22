@@ -41,6 +41,22 @@ npm run build
 npm run preview
 ```
 
+## Deployment
+
+This app is configured to deploy to GitHub Pages using GitHub Actions.
+
+### Setup for GitHub Pages
+
+1. Go to your repository Settings → Pages
+2. Under "Source", select "GitHub Actions"
+3. Push to the `main` or `master` branch to trigger deployment
+
+The workflow will automatically:
+- Build the app
+- Deploy to GitHub Pages
+
+**Note:** If your repository name is not `reflectie`, update the `base` path in `vite.config.js` to match your repository name.
+
 ## Behavioral Patterns
 
 1. **TRY HARD** - Taking on too much, solving everything alone
@@ -70,4 +86,3 @@ npm run preview
 9. Coaching Question
 10. Appointment Booking
 11. Success Screen
-

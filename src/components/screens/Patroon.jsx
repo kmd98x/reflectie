@@ -29,16 +29,31 @@ const Patroon = () => {
       </div>
 
       <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-        <h1 className="text-2xl font-bold text-primary mb-6 text-center">
-          {patternData.name}
+        <h1 className="text-2xl font-bold text-primary mb-2 text-center">
+          {patternData.name} / {patternData.nameNL}
         </h1>
+        
+        <p className="text-sm text-gray-500 mb-6 text-center">
+          Dit is één van de vijf patronen uit het Drowning Person Model
+        </p>
 
         <div className="flex justify-center mb-6">
           <DrowningPerson
             size="medium"
-            labelAbove={patternData.name}
-            labelBelow={patternData.dont}
+            labelAbove={patternData.nameNL}
+            labelBelow={patternData.dontNL}
           />
+        </div>
+
+        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-6">
+          <h3 className="font-semibold text-primary mb-2 text-sm">De 5 patronen uit het model:</h3>
+          <ul className="text-xs text-text space-y-1">
+            <li>• <strong>TRY HARD</strong> / <strong>BLIJVEN PROBEREN</strong> - Je doet alles zelf</li>
+            <li>• <strong>PLEASE</strong> / <strong>PLEASEN</strong> - Je wilt iedereen tevreden houden</li>
+            <li>• <strong>BE PERFECT</strong> / <strong>WEES PERFECT</strong> - Alles moet perfect zijn</li>
+            <li>• <strong>BE STRONG</strong> / <strong>WEES STERK</strong> - Je toont geen zwakte</li>
+            <li>• <strong>HURRY UP</strong> / <strong>HASTEN</strong> - Je hebt altijd haast</li>
+          </ul>
         </div>
 
         <div className="bg-white border-2 border-gray-200 rounded-lg p-6 mb-6">

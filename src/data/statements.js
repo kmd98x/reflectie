@@ -41,7 +41,9 @@ export const COACHING_QUESTIONS = {
 export const PATTERN_DESCRIPTIONS = {
   tryhard: {
     name: "TRY HARD",
+    nameNL: "BLIJVEN PROBEREN",
     dont: "DON'T ASK FOR HELP",
+    dontNL: "VRAG NIET OM HULP",
     characteristics: [
       "Je wilt bewijzen dat je het waard bent",
       "Je lost alles zelf op",
@@ -54,7 +56,9 @@ export const PATTERN_DESCRIPTIONS = {
   },
   please: {
     name: "PLEASE",
+    nameNL: "PLEASEN",
     dont: "DON'T DISAPPOINT",
+    dontNL: "STEL NIEMAND TELEUR",
     characteristics: [
       "Je wilt iedereen tevreden houden",
       "Nee zeggen is moeilijk",
@@ -67,7 +71,9 @@ export const PATTERN_DESCRIPTIONS = {
   },
   beperfect: {
     name: "BE PERFECT",
+    nameNL: "WEES PERFECT",
     dont: "DON'T MAKE MISTAKES",
+    dontNL: "MAAK GEEN FOUTEN",
     characteristics: [
       "Je stelt hoge eisen aan jezelf",
       "Fouten voelen zwaar",
@@ -80,7 +86,9 @@ export const PATTERN_DESCRIPTIONS = {
   },
   bestrong: {
     name: "BE STRONG",
+    nameNL: "WEES STERK",
     dont: "DON'T BE VULNERABLE",
+    dontNL: "WEES NIET KWETSBAAR",
     characteristics: [
       "Je toont geen zwakte",
       "Emoties hou je binnen",
@@ -93,7 +101,9 @@ export const PATTERN_DESCRIPTIONS = {
   },
   hurryup: {
     name: "HURRY UP",
+    nameNL: "HASTEN",
     dont: "DON'T TAKE TIME",
+    dontNL: "NEEM GEEN TIJD",
     characteristics: [
       "Je hebt altijd haast",
       "Wachten is moeilijk",
@@ -127,8 +137,15 @@ export function detectDominantPattern(responses) {
   };
   
   responses.forEach(response => {
-    if (response.answer === 'ja' && response.pattern && counts.hasOwnProperty(response.pattern)) {
-      counts[response.pattern]++;
+    if (response.pattern && counts.hasOwnProperty(response.pattern)) {
+      // Count different answer types with weights
+      // Only count positive answers, 'nee' and 'helemaal_niet' don't count at all
+      if (response.answer === 'ja') {
+        counts[response.pattern] += 3; // Strong yes
+      } else if (response.answer === 'soms') {
+        counts[response.pattern] += 1; // Sometimes (counts less)
+      }
+      // 'nee' and 'helemaal_niet' don't count at all
     }
   });
   
