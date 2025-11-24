@@ -132,7 +132,7 @@ const Profiel = () => {
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               placeholder={t('naamPlaceholder', language)}
-              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white"
             />
           </EditableField>
 
@@ -156,7 +156,7 @@ const Profiel = () => {
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
               max={new Date().toISOString().split('T')[0]}
-              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white"
             />
           </EditableField>
 
@@ -180,7 +180,7 @@ const Profiel = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={language === 'en' ? 'your@email.com' : 'jouw@email.nl'}
-              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white"
             />
           </EditableField>
 
@@ -204,7 +204,7 @@ const Profiel = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder={language === 'en' ? '+31 6 12345678' : '06 12345678'}
-              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white"
             />
           </EditableField>
 
@@ -228,7 +228,7 @@ const Profiel = () => {
               onChange={(e) => setBio(e.target.value)}
               placeholder={t('profielBioPlaceholder', language)}
               rows={4}
-              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-700 dark:text-white resize-none"
+              className="w-full px-3 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white resize-none"
             />
           </EditableField>
 

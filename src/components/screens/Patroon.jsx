@@ -52,7 +52,7 @@ const Patroon = () => {
             <li>• <strong>PLEASE</strong> / <strong>PLEASEN</strong> - Je wilt iedereen tevreden houden</li>
             <li>• <strong>BE PERFECT</strong> / <strong>WEES PERFECT</strong> - Alles moet perfect zijn</li>
             <li>• <strong>BE STRONG</strong> / <strong>WEES STERK</strong> - Je toont geen zwakte</li>
-            <li>• <strong>HURRY UP</strong> / <strong>HASTEN</strong> - Je hebt altijd haast</li>
+            <li>• <strong>HURRY UP</strong> / <strong>HAASTEN</strong> - Je hebt altijd haast</li>
           </ul>
         </div>
 

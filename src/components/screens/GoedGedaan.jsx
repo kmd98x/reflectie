@@ -6,7 +6,7 @@ import { COACHING_QUESTIONS, PATTERN_DESCRIPTIONS } from '../../data/statements'
 const GoedGedaan = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { dominantPattern, appointmentDate, appointmentTime } = location.state || {};
+  const { dominantPattern, appointmentDate, appointmentTime, reminderEmail } = location.state || {};
 
   if (!dominantPattern) {
     return null;
@@ -61,6 +61,8 @@ const GoedGedaan = () => {
               <p className="text-sm text-text">
                 {appointmentDate && appointmentTime
                   ? `${formatDate(appointmentDate)} om ${appointmentTime}`
+                  : reminderEmail
+                  ? `Er is een reminder gestuurd naar ${reminderEmail}`
                   : 'Niet geboekt'}
               </p>
             </div>

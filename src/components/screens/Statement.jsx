@@ -174,14 +174,17 @@ const Statement = () => {
       </div>
 
       <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-primary dark:text-white mb-4 text-center">
+          Stelling {progress}
+        </h2>
+        
+        <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg p-8 mb-6 shadow-lg">
+          <div className="flex justify-center mb-6">
+            <DrowningPerson size="small" />
+          </div>
           <p className="text-lg text-text dark:text-gray-200 text-center leading-relaxed">
             {statement.text}
           </p>
-        </div>
-
-        <div className="flex justify-center mb-8">
-          <DrowningPerson size="small" />
         </div>
       </div>
 
@@ -215,12 +218,50 @@ const Statement = () => {
           </div>
         </div>
 
-        <button
-          onClick={handleContinue}
-          className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg text-base hover:opacity-90 transition-opacity"
-        >
-          {t('verder', language)}
-        </button>
+        <div className="space-y-3">
+          <button
+            onClick={handleContinue}
+            className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg text-base hover:opacity-90 transition-opacity"
+          >
+            {t('verder', language)}
+          </button>
+          <button
+            onClick={() => {
+              // Skip without adding an answer
+              const editingIndex = location.state?.editingResponseIndex;
+              
+              if (editingIndex !== undefined) {
+                // If editing, go back to overview without saving
+                navigate('/overzicht-antwoorden', { state: location.state });
+              } else {
+                // Skip to next statement without adding response
+                setTimeout(() => {
+                  if (currentIndex < totalStatements - 1) {
+                    navigate(`/statement/${currentIndex + 1}`, {
+                      state: {
+                        ...location.state,
+                        shuffledStatements,
+                        responses: responses // Keep existing responses, don't add new one
+                      }
+                    });
+                  } else {
+                    // Last statement, go to overview
+                    navigate('/overzicht-antwoorden', {
+                      state: {
+                        ...location.state,
+                        shuffledStatements,
+                        responses: responses
+                      }
+                    });
+                  }
+                }, 200);
+              }
+            }}
+            className="w-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-text dark:text-white font-semibold py-4 px-6 rounded-lg text-base hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Overslaan
+          </button>
+        </div>
       </div>
 
       <NavigationBar />

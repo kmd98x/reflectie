@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useApp } from '../../context/AppContext';
+import { t } from '../../i18n/translations';
 
 const PrivacyBeleid = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { language } = useApp();
   const [understood, setUnderstood] = useState(false);
 
   const handleContinue = () => {
@@ -36,34 +39,34 @@ const PrivacyBeleid = () => {
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-primary mb-6">
-            Privacy eerst
+            {t('privacyTitle', language)}
           </h1>
         </div>
 
         <div className="space-y-4 mb-8">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>
             <svg className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <p className="text-sm text-text">Je gegevens worden veilig opgeslagen</p>
+            <p className="text-sm text-text">{t('privacyPoint1', language)}</p>
           </div>
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             <svg className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <p className="text-sm text-text">We delen niets met derden</p>
+            <p className="text-sm text-text">{t('privacyPoint2', language)}</p>
           </div>
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
             <svg className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <p className="text-sm text-text">Je kunt je gegevens altijd verwijderen</p>
+            <p className="text-sm text-text">{t('privacyPoint3', language)}</p>
           </div>
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}>
             <svg className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <p className="text-sm text-text">Alleen jij ziet jouw resultaten</p>
+            <p className="text-sm text-text">{t('privacyPoint4', language)}</p>
           </div>
         </div>
 
@@ -72,9 +75,9 @@ const PrivacyBeleid = () => {
             type="checkbox"
             checked={understood}
             onChange={(e) => setUnderstood(e.target.checked)}
-            className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
+            className="w-5 h-5 text-primary border-2 border-gray-400 rounded focus:ring-primary focus:ring-2 focus:ring-offset-0 bg-white checked:bg-primary checked:border-primary"
           />
-          <span className="text-sm text-text">Ik begrijp het</span>
+          <span className="text-sm text-text">{t('privacyUnderstand', language)}</span>
         </label>
       </div>
 
@@ -83,7 +86,7 @@ const PrivacyBeleid = () => {
         disabled={!understood}
         className="w-full max-w-sm mx-auto bg-primary text-white font-semibold py-4 px-6 rounded-lg text-base disabled:bg-gray-300 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
       >
-        Ga verder
+        {t('privacyContinue', language)}
       </button>
     </div>
   );

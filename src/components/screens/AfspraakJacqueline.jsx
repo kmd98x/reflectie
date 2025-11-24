@@ -13,6 +13,9 @@ const AfspraakJacqueline = () => {
   const [contactType, setContactType] = useState('email'); // 'email' or 'phone'
   const [contactValue, setContactValue] = useState('');
   const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
+  const [showReminderPopup, setShowReminderPopup] = useState(false);
+  const [reminderEmail, setReminderEmail] = useState('');
+  const [reminderConfirmed, setReminderConfirmed] = useState(false);
 
   const { dominantPattern } = location.state || {};
   const patternName = dominantPattern ? PATTERN_DESCRIPTIONS[dominantPattern].nameNL : '';
@@ -47,7 +50,26 @@ const AfspraakJacqueline = () => {
   };
 
   const handleLater = () => {
-    navigate('/goed-gedaan', { state: location.state });
+    setShowReminderPopup(true);
+  };
+
+  const handleReminderConfirm = () => {
+    if (reminderEmail.trim()) {
+      setReminderConfirmed(true);
+    }
+  };
+
+  const handleReminderClose = () => {
+    setShowReminderPopup(false);
+    const email = reminderEmail;
+    setReminderEmail('');
+    setReminderConfirmed(false);
+    navigate('/goed-gedaan', { 
+      state: {
+        ...location.state,
+        reminderEmail: email
+      }
+    });
   };
 
   const formatDate = (dateStr) => {
@@ -113,7 +135,7 @@ const AfspraakJacqueline = () => {
           disabled={!selectedDate || !selectedTime}
           className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg text-base disabled:bg-gray-300 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
         >
-          Bevestig afspraak
+          Maak afspraak
         </button>
         <button
           onClick={handleLater}
@@ -166,7 +188,7 @@ const AfspraakJacqueline = () => {
               value={contactValue}
               onChange={(e) => setContactValue(e.target.value)}
               placeholder={contactType === 'email' ? 'jouw@email.nl' : '06 12345678'}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary mb-4"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary bg-white text-text mb-4"
             />
 
             <div className="flex gap-3">
@@ -219,6 +241,64 @@ const AfspraakJacqueline = () => {
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Reminder Popup */}
+      {showReminderPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-sm w-full">
+            {!reminderConfirmed ? (
+              <>
+                <h3 className="text-xl font-bold text-primary dark:text-white mb-4">
+                  Later plannen
+                </h3>
+                <p className="text-sm text-text dark:text-gray-200 mb-4">
+                  Wil je dat we later een reminder sturen om een afspraak in te plannen?
+                </p>
+                <input
+                  type="email"
+                  value={reminderEmail}
+                  onChange={(e) => setReminderEmail(e.target.value)}
+                  placeholder="jouw@email.nl"
+                  className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-700 text-text dark:text-white mb-4"
+                />
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleReminderClose}
+                    className="flex-1 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-text dark:text-white font-semibold py-3 px-4 rounded-lg text-base hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    Nee, bedankt
+                  </button>
+                  <button
+                    onClick={handleReminderConfirm}
+                    disabled={!reminderEmail.trim()}
+                    className="flex-1 bg-primary text-white font-semibold py-3 px-4 rounded-lg text-base disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+                  >
+                    Ja, stuur reminder
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-primary dark:text-white mb-2">Reminder ingesteld!</h3>
+                <p className="text-sm text-text dark:text-gray-200 mb-4">
+                  We sturen je een reminder naar {reminderEmail} om later een afspraak in te plannen.
+                </p>
+                <button
+                  onClick={handleReminderClose}
+                  className="w-full bg-primary text-white font-semibold py-3 px-4 rounded-lg text-base hover:opacity-90 transition-opacity"
+                >
+                  OK
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

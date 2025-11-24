@@ -18,7 +18,7 @@ export const translations = {
     // Zero State
     zeroStateTitle: 'Sta je aan het begin van je leiderschap, of loop je vast in wat van je wordt verwacht?',
     zeroStateSubtitle: 'Ontdek wie jij bent als leider!',
-    zeroStateButton: 'Ontdek wat je écht beweegt',
+    zeroStateButton: 'Start',
     
     // Naam
     naamTitle: 'Hoe wil je genoemd worden?',
@@ -91,7 +91,7 @@ export const translations = {
     patroonPlease: 'PLEASE / PLEASEN - Je wilt iedereen tevreden houden',
     patroonPerfect: 'BE PERFECT / WEES PERFECT - Alles moet perfect zijn',
     patroonStrong: 'BE STRONG / WEES STERK - Je toont geen zwakte',
-    patroonHurry: 'HURRY UP / HASTEN - Je hebt altijd haast',
+    patroonHurry: 'HURRY UP / HAASTEN - Je hebt altijd haast',
     patroonDitBenJij: 'Dit ben jij:',
     patroonDitHerkenJe: 'Dit herken je vooral bij:',
     
@@ -182,7 +182,7 @@ export const translations = {
     // Zero State
     zeroStateTitle: 'Are you at the beginning of your leadership, or stuck in what is expected of you?',
     zeroStateSubtitle: 'Discover who you are as a leader!',
-    zeroStateButton: 'Discover what really moves you',
+    zeroStateButton: 'Start',
     
     // Naam
     naamTitle: 'What would you like to be called?',

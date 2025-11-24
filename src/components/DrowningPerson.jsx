@@ -42,21 +42,52 @@ const DrowningPerson = ({ size = 'medium', labelAbove = '', labelBelow = '', ani
         viewBox="0 0 200 200"
         className="flex-shrink-0"
       >
-        {/* Water waves */}
-        <path
-          d="M 0 120 Q 50 100, 100 120 T 200 120 L 200 200 L 0 200 Z"
-          fill="#E3F2FD"
-          opacity="0.6"
-        />
-        <path
-          d="M 0 140 Q 50 120, 100 140 T 200 140 L 200 200 L 0 200 Z"
-          fill="#BBDEFB"
-          opacity="0.8"
-        />
-        <path
-          d="M 0 160 Q 50 140, 100 160 T 200 160 L 200 200 L 0 200 Z"
-          fill="#90CAF9"
-        />
+        <defs>
+          <style>{`
+            @keyframes wave1 {
+              0%, 100% { transform: translateX(0) translateY(0); }
+              25% { transform: translateX(2px) translateY(-3px); }
+              50% { transform: translateX(0) translateY(-5px); }
+              75% { transform: translateX(-2px) translateY(-3px); }
+            }
+            @keyframes wave2 {
+              0%, 100% { transform: translateX(0) translateY(0); }
+              25% { transform: translateX(-2px) translateY(-2px); }
+              50% { transform: translateX(0) translateY(-4px); }
+              75% { transform: translateX(2px) translateY(-2px); }
+            }
+            @keyframes wave3 {
+              0%, 100% { transform: translateX(0) translateY(0); }
+              25% { transform: translateX(1px) translateY(-1px); }
+              50% { transform: translateX(0) translateY(-3px); }
+              75% { transform: translateX(-1px) translateY(-1px); }
+            }
+            .wave1 { animation: wave1 3s ease-in-out infinite; }
+            .wave2 { animation: wave2 2.5s ease-in-out infinite; }
+            .wave3 { animation: wave3 2s ease-in-out infinite; }
+          `}</style>
+        </defs>
+        {/* Water waves - animated */}
+        <g className="wave1">
+          <path
+            d="M 0 120 Q 50 100, 100 120 T 200 120 L 200 200 L 0 200 Z"
+            fill="#E3F2FD"
+            opacity="0.6"
+          />
+        </g>
+        <g className="wave2">
+          <path
+            d="M 0 140 Q 50 120, 100 140 T 200 140 L 200 200 L 0 200 Z"
+            fill="#BBDEFB"
+            opacity="0.8"
+          />
+        </g>
+        <g className="wave3">
+          <path
+            d="M 0 160 Q 50 140, 100 160 T 200 160 L 200 200 L 0 200 Z"
+            fill="#90CAF9"
+          />
+        </g>
         
         {/* Drowning person (stick figure with arms up) */}
         {/* Head */}

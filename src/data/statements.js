@@ -101,7 +101,7 @@ export const PATTERN_DESCRIPTIONS = {
   },
   hurryup: {
     name: "HURRY UP",
-    nameNL: "HASTEN",
+    nameNL: "HAASTEN",
     dont: "DON'T TAKE TIME",
     dontNL: "NEEM GEEN TIJD",
     characteristics: [

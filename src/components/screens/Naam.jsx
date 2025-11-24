@@ -47,7 +47,7 @@ const Naam = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={t('naamPlaceholder', language)}
-          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary dark:bg-gray-800 dark:text-white mb-2"
+          className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:border-primary bg-white dark:bg-gray-800 text-text dark:text-white mb-2"
         />
 
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-8">

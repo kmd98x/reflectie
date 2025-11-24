@@ -99,7 +99,7 @@ const CoachingVraag = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="jouw@email.nl"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary mb-4"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary bg-white text-text mb-4"
                 />
                 <div className="flex gap-3">
                   <button
@@ -129,7 +129,7 @@ const CoachingVraag = () => {
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-2">Verzonden!</h3>
                 <p className="text-sm text-text mb-4">
-                  Je patroon en coachingsvraag zijn verstuurd naar {email}
+                  Je coaching vraag is verstuurd naar {email}
                 </p>
                 <button
                   onClick={handleClosePopup}

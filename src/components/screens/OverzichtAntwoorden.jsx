@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import NavigationBar from '../NavigationBar';
-import { STATEMENTS, detectDominantPattern } from '../../data/statements';
+import { detectDominantPattern } from '../../data/statements';
 import { useApp } from '../../context/AppContext';
 import { t } from '../../i18n/translations';
 
@@ -12,12 +12,8 @@ const OverzichtAntwoorden = () => {
   const responses = location.state?.responses || [];
   const shuffledStatements = location.state?.shuffledStatements || [];
 
-  const getStatementText = (statementId) => {
-    const statement = STATEMENTS.find(s => s.id === statementId);
-    return statement ? statement.text : 'Onbekende stelling';
-  };
-
   const getAnswerLabel = (answer) => {
+    if (!answer) return 'Geen antwoord gegeven';
     const labels = {
       'ja': 'Ja',
       'soms': 'Soms',
@@ -27,17 +23,33 @@ const OverzichtAntwoorden = () => {
     return labels[answer] || answer;
   };
 
-  const handleEditSingle = (responseIndex) => {
+  // Create a map of statementId to response for quick lookup
+  const responseMap = new Map();
+  responses.forEach((response, idx) => {
+    responseMap.set(response.statementId, { ...response, originalIndex: idx });
+  });
+
+  // Show all statements from shuffled list, with their answers or "no answer"
+  const allStatementsWithAnswers = shuffledStatements.map((statement, idx) => {
+    const response = responseMap.get(statement.id);
+    return {
+      statementId: statement.id,
+      statementText: statement.text,
+      answer: response ? response.answer : null,
+      responseIndex: response ? response.originalIndex : null
+    };
+  });
+
+  const handleEditSingle = (statementId, responseIndex) => {
     // Find which statement index in shuffled array
-    const response = responses[responseIndex];
-    const shuffledIndex = shuffledStatements.findIndex(s => s.id === response.statementId);
+    const shuffledIndex = shuffledStatements.findIndex(s => s.id === statementId);
     
     if (shuffledIndex !== -1) {
       navigate(`/statement/${shuffledIndex}`, {
         state: {
           ...location.state,
           responses,
-          editingResponseIndex: responseIndex
+          editingResponseIndex: responseIndex !== null ? responseIndex : undefined
         }
       });
     }
@@ -75,19 +87,21 @@ const OverzichtAntwoorden = () => {
 
         <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 max-h-96 overflow-y-auto">
           <div className="space-y-4">
-            {responses.map((response, index) => (
+            {allStatementsWithAnswers.map((item, index) => (
               <div key={index} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">
                 <div className="mb-2">
-                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">{t('overzichtStelling', language)}</p>
-                  <p className="text-sm text-text dark:text-gray-200 mb-3">"{getStatementText(response.statementId)}"</p>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">{t('overzichtStelling', language)} {index + 1}:</p>
+                  <p className="text-sm text-text dark:text-gray-200 mb-3">"{item.statementText}"</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">{t('overzichtAntwoord', language)}</p>
-                    <p className="text-sm font-medium text-primary dark:text-accent">"{getAnswerLabel(response.answer)}"</p>
+                    <p className={`text-sm font-medium ${item.answer ? 'text-primary dark:text-accent' : 'text-gray-500 dark:text-gray-400 italic'}`}>
+                      "{getAnswerLabel(item.answer)}"
+                    </p>
                   </div>
                   <button
-                    onClick={() => handleEditSingle(index)}
+                    onClick={() => handleEditSingle(item.statementId, item.responseIndex)}
                     className="ml-4 text-primary dark:text-accent hover:opacity-70 transition-opacity flex items-center gap-1 text-sm font-medium"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
